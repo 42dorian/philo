@@ -3,4 +3,5 @@
 *.d
 a.out
 .DS_Store
-.vscode/
+philo/philo
+zed/

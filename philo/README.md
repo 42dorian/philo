@@ -1,4 +1,4 @@
-*This project was created as part of the 42 curriculum by **dabdulla**.*
+*This project was created as part of the 42 curriculum by dabdulla.*
 
 ## Description
 
@@ -25,4 +25,5 @@ make re       # full recompile
 
 ## Resources
 
-<!-- Add helpful links, peers you discussed with, etc. -->
+https://www.youtube.com/watch?v=ldJ5WGZVXZk
+https://www.youtube.com/watch?v=raLCgPK-Igc

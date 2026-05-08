@@ -18,6 +18,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	init_pthreads(void);
+typedef struct s_philos	t_philos;
+
+typedef struct s_philos
+{
+	int					has_forks;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					time_to_think;
+	int					times_ate;
+	pthread_t			thread;
+	t_philos			*next;
+}						t_philos;
+
+int						init_pthreads(void);
 
 #endif
