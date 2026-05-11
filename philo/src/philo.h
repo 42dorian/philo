@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 typedef struct s_philos	t_philos;
@@ -33,5 +34,12 @@ typedef struct s_philos
 }						t_philos;
 
 int						init_pthreads(void);
+int						ft_atoi(char *nptr);
+void					*ft_memset(void *s, int c, size_t n);
+void					ft_bzero(void *s, size_t n);
+void					*ft_calloc(size_t nmemb, size_t size);
+long					time_to_ms(void);
+void					free_philos(t_philos **philo);
+int						is_num(char *str);
 
 #endif

@@ -1,45 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabdulla <dabdulla@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/06 17:04:13 by dabdulla          #+#    #+#             */
-/*   Updated: 2026/05/06 17:05:26 by dabdulla         ###   ########.fr       */
+/*   Created: 2026/05/11 16:54:44 by dabdulla          #+#    #+#             */
+/*   Updated: 2026/05/11 17:04:05 by dabdulla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philo.h"
 
-int	init_philos(t_philos *philo, int philo_size)
+void	free_philos(t_philos **philo)
 {
-	int			i;
 	t_philos	*tmp;
 
-	tmp = philo;
-	i = 0;
-	while (i < philo_size)
+	if (!philo)
+		return ;
+	tmp = NULL;
+	while (*philo)
 	{
-		philo = ft_calloc(sizeof(t_philos), 1);
-		if (!philo)
-			return (free_philos(&tmp), 0);
-		philo = philo->next;
+		tmp = (*philo)->next;
+		free(philo);
+		*philo = tmp;
 	}
-	return (1);
 }
 
-int	main(int ac, char **av)
+long	time_to_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+int	is_num(char *str)
 {
 	int	i;
 
-	if (ac < 2 || ac > 6)
-		return (1);
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (str[i])
 	{
-		if (!is_num(av[i]))
-			return (printf("wrong"), 1);
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
