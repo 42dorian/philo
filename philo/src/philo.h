@@ -54,11 +54,11 @@ void							*ft_memset(void *s, int c, size_t n);
 void							ft_bzero(void *s, size_t n);
 void							*ft_calloc(size_t nmemb, size_t size);
 long							time_to_ms(void);
-void	free_philos(t_philos **philo, int philo_size);
+void							free_philos(t_philos **philo, int philo_size);
 int								is_num(char *str);
 t_philos						*init_philos(int philo_size,
 									t_shared_info *shared_info);
 void							link_forks(int philo_size, t_philos *philo);
-void print_philo(t_philos *philo, char *msg);
+void							print_philo(t_philos *philo, char *msg);
 
 #endif

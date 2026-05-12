@@ -2,7 +2,8 @@ NAME = philo
 
 SOURCE = src/main.c \
             src/libft.c \
-            src/utils.c
+            src/general-utils.c \
+            src/philo-utils.c
 
 CFLAGS = -Wall -Wextra -Werror -g
 
