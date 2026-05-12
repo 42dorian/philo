@@ -12,19 +12,26 @@
 
 #include "philo.h"
 
-void	free_philos(t_philos **philo)
+void	free_philos(t_philos **head, int philo_size)
 {
-	t_philos	*tmp;
+	t_philos	*curr;
+	t_philos    *next;
+	int i;
 
-	if (!philo)
+	if (!head || !(*head))
 		return ;
-	tmp = NULL;
-	while (*philo)
+	i = 0;
+	curr = *head;
+	while (i < philo_size)
 	{
-		tmp = (*philo)->next;
-		free(philo);
-		*philo = tmp;
+	    next = curr->next;
+		pthread_mutex_destroy(&curr->meal_mutex);
+		pthread_mutex_destroy(&curr->fork);
+		free(curr);
+		curr = next;
+		i++;
 	}
+	*head = NULL;
 }
 
 long	time_to_ms(void)
@@ -47,4 +54,17 @@ int	is_num(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void print_philo(t_philos *philo, char *msg)
+{
+    long time;
+    time += philo->shared_info->start_time - time_to_ms();
+    printf("%lu %d %s\n", time, philo->id, msg);
+}
+
+int check_input(int ac)
+{
+    //properly check input
+    return 1;
 }
