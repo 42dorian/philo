@@ -20,29 +20,28 @@ void	*philo_routine(void *arg)
 		usleep(100);
 	while (1)
 	{
-        if(!philo_eat(philo))
-            break;
-        if (!philo_sleep(philo))
-            break;
-        if (!philo_think(philo))
-            break;
+		if (!philo_eat(philo))
+			break ;
+		if (!philo_sleep(philo))
+			break ;
+		if (!philo_think(philo))
+			break ;
 	}
 	return (NULL);
 }
 
 int	main(int ac, char **av)
 {
-    t_philos *philos;
-    t_shared_info *shared;
+	t_philos		*philos;
+	t_shared_info	shared;
+	int philo_size;
 
-    philos = NULL;
-    shared = NULL;
 	if (!check_input(ac, av))
 		return (1);
-	if (!init_shared(shared, av))
-        return (1);
-	if (!init_philos(ft_atoi(av[1]), shared))
-	    return (1);
-	create_pthreads(philos, ft_atoi(av[1]));
+	philo_size = ft_atoi(av[1]);
+	philos = initialize(philos, &shared, av, philo_size);
+	if (!philos)
+		return (1);
+	create_pthreads(philos, philo_size);
 	return (0);
 }

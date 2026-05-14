@@ -60,6 +60,7 @@ t_philos						*init_philos(int philo_size,
 void							link_forks(int philo_size, t_philos *philo);
 void							print_philo(t_philos *philo, char *msg);
 void							ft_usleep(long ms);
+void	grab_forks(t_philos *philo);
 int								philo_eat(t_philos *philo);
 int								philo_sleep(t_philos *philo);
 int								philo_think(t_philos *philo);
@@ -67,6 +68,8 @@ int								check_input(int ac, char **av);
 void							*philo_routine(void *arg);
 void							create_pthreads(t_philos *philo,
 									int philo_size);
-int init_shared(t_shared_info *shared, char **av);
-int args_to_shared_info(t_shared_info *shared, char **av);
+void								init_shared(t_shared_info *shared, char **av);
+int								args_to_shared_info(t_shared_info *shared,
+									char **av);
+t_philos *initialize(t_philos *philos, t_shared_info *shared, char **av, int n);
 #endif

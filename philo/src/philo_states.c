@@ -15,6 +15,7 @@ int	philo_eat(t_philos *philo)
 {
 	if (philo->shared_info->stop_routine == 1 || philo->is_done)
 		return (0);
+	grab_forks(philo);
 	pthread_mutex_lock(&philo->shared_info->end_mutex);
 	if ((time_to_ms() - philo->last_meal) >= philo->shared_info->time_to_die)
 	{
@@ -29,8 +30,8 @@ int	philo_eat(t_philos *philo)
 	pthread_mutex_unlock(&philo->shared_info->end_mutex);
 	pthread_mutex_lock(&philo->meal_mutex);
 	print_philo(philo, "is eating");
-	philo->meal_count++;
 	philo->last_meal = time_to_ms();
+	philo->meal_count++;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	ft_usleep((long)philo->shared_info->time_to_eat);
 	pthread_mutex_unlock(&philo->fork);

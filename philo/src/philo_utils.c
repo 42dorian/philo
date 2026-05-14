@@ -12,15 +12,17 @@
 
 #include "philo.h"
 
-
-int args_to_shared_info(t_shared_info *shared, char **av)
+int	args_to_shared_info(t_shared_info *shared, char **av)
 {
-    shared->time_to_die = ft_atoi(av[2]);
-    shared->time_to_eat = ft_atoi(av[3]);
-    shared->time_to_sleep = ft_atoi(av[4]);
-    if (av[5])
-        shared->max_meals = ft_atoi(av[5]);
-    return (1);
+	shared->time_to_die = ft_atoi(av[2]);
+	shared->time_to_eat = ft_atoi(av[3]);
+	shared->time_to_sleep = ft_atoi(av[4]);
+	if (av[5])
+		shared->max_meals = ft_atoi(av[5]);
+	else
+		shared->max_meals = -1;
+	shared->stop_routine = 0;
+	return (1);
 }
 
 void	link_forks(int philo_size, t_philos *philo)

@@ -45,9 +45,9 @@ int	check_input(int ac, char **av)
 {
 	int	i;
 
-	i = 0;
-	if (ac < 2 || ac > 6)
-		return (0);
+	i = 1;
+	if (ac < 5 || ac > 6)
+		return (printf("Error: Wrong number of arguments\n"), 0);
 	if (ft_atoi(av[1]) < 1)
 	{
 		printf("Error:\nMust be at least 1 philo\n");
@@ -56,7 +56,7 @@ int	check_input(int ac, char **av)
 	while (av[i])
 	{
 		if (!is_num(av[i]))
-			return (printf("Error:\nArguments must be all digits!\n"), 1);
+			return (printf("Error:\nArguments must be all digits!\n"), 0);
 		i++;
 	}
 	return (1);
