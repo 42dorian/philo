@@ -27,8 +27,8 @@ typedef struct s_shared_info
 	int							time_to_die;
 	int							time_to_eat;
 	int							time_to_sleep;
-	int							time_to_think;
-	int							stop;
+	int							max_meals;
+	int							stop_routine;
 	long						start_time;
 	pthread_mutex_t				end_mutex;
 	pthread_mutex_t				print_mutex;
@@ -37,8 +37,8 @@ typedef struct s_shared_info
 typedef struct s_philos
 {
 	int							id;
-	int							eat_count;
 	int							meal_count;
+	int							is_done;
 	long						last_meal;
 	pthread_t					thread;
 	pthread_mutex_t				fork;
@@ -48,7 +48,6 @@ typedef struct s_philos
 	t_philos					*next;
 }								t_philos;
 
-int								init_pthreads(void);
 int								ft_atoi(char *nptr);
 void							*ft_memset(void *s, int c, size_t n);
 void							ft_bzero(void *s, size_t n);
@@ -60,5 +59,14 @@ t_philos						*init_philos(int philo_size,
 									t_shared_info *shared_info);
 void							link_forks(int philo_size, t_philos *philo);
 void							print_philo(t_philos *philo, char *msg);
-
+void							ft_usleep(long ms);
+int								philo_eat(t_philos *philo);
+int								philo_sleep(t_philos *philo);
+int								philo_think(t_philos *philo);
+int								check_input(int ac, char **av);
+void							*philo_routine(void *arg);
+void							create_pthreads(t_philos *philo,
+									int philo_size);
+int init_shared(t_shared_info *shared, char **av);
+int args_to_shared_info(t_shared_info *shared, char **av);
 #endif
