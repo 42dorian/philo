@@ -39,7 +39,6 @@ typedef struct s_philos
 {
 	int							id;
 	int							meal_count;
-	int							is_done;
 	long						last_meal;
 	pthread_t					thread;
 	pthread_mutex_t				fork;
@@ -67,7 +66,7 @@ int								philo_sleep(t_philos *philo);
 int								philo_think(t_philos *philo);
 int								check_input(int ac, char **av);
 void							*philo_routine(void *arg);
-void							create_pthreads(t_philos *philo,
+int								create_pthreads(t_philos *philo,
 									int philo_size);
 void							init_shared(t_shared_info *shared, char **av);
 int								args_to_shared_info(t_shared_info *shared,
@@ -76,4 +75,6 @@ t_philos						*initialize(t_shared_info *shared, char **av,
 									int n);
 int								has_died(t_philos *philo);
 int								check_table(t_philos *p, t_shared_info *sh);
+void							release_forks(t_philos *philo);
+void							join_threads(t_philos *philos, int philo_size);
 #endif

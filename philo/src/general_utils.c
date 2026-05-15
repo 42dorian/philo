@@ -85,3 +85,17 @@ void	ft_usleep(long ms, t_philos *philo)
 		usleep(500);
 	}
 }
+
+void	join_threads(t_philos *philos, int philo_size)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo_size)
+	{
+		if (philos->thread)
+			pthread_join(philos->thread, NULL);
+		philos = philos->next;
+		i++;
+	}
+}

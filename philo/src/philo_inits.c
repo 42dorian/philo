@@ -71,15 +71,17 @@ t_philos	*init_philos(int philo_size, t_shared_info *shared_info)
 	return (head);
 }
 
-void	create_pthreads(t_philos *philo, int philo_size)
+int	create_pthreads(t_philos *philo, int philo_size)
 {
 	int	i;
 
 	i = 0;
 	while (i < philo_size)
 	{
-		pthread_create(&philo->thread, NULL, philo_routine, philo);
+		if (pthread_create(&philo->thread, NULL, philo_routine, philo))
+			return (0);
 		philo = philo->next;
 		i++;
 	}
+	return (1);
 }
