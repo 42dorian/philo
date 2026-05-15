@@ -29,6 +29,7 @@ typedef struct s_shared_info
 	int							time_to_sleep;
 	int							max_meals;
 	int							stop_routine;
+	int							philo_size;
 	long						start_time;
 	pthread_mutex_t				end_mutex;
 	pthread_mutex_t				print_mutex;
@@ -48,7 +49,7 @@ typedef struct s_philos
 	t_philos					*next;
 }								t_philos;
 
-int								ft_atoi(char *nptr);
+long							ft_atoi(char *nptr);
 void							*ft_memset(void *s, int c, size_t n);
 void							ft_bzero(void *s, size_t n);
 void							*ft_calloc(size_t nmemb, size_t size);
@@ -59,8 +60,8 @@ t_philos						*init_philos(int philo_size,
 									t_shared_info *shared_info);
 void							link_forks(int philo_size, t_philos *philo);
 void							print_philo(t_philos *philo, char *msg);
-void							ft_usleep(long ms);
-void	grab_forks(t_philos *philo);
+void							ft_usleep(long ms, t_philos *philo);
+void							grab_forks(t_philos *philo);
 int								philo_eat(t_philos *philo);
 int								philo_sleep(t_philos *philo);
 int								philo_think(t_philos *philo);
@@ -68,8 +69,11 @@ int								check_input(int ac, char **av);
 void							*philo_routine(void *arg);
 void							create_pthreads(t_philos *philo,
 									int philo_size);
-void								init_shared(t_shared_info *shared, char **av);
+void							init_shared(t_shared_info *shared, char **av);
 int								args_to_shared_info(t_shared_info *shared,
 									char **av);
-t_philos *initialize(t_philos *philos, t_shared_info *shared, char **av, int n);
+t_philos						*initialize(t_shared_info *shared, char **av,
+									int n);
+int								has_died(t_philos *philo);
+int								check_table(t_philos *p, t_shared_info *sh);
 #endif

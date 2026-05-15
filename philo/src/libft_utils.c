@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	ft_atoi(char *nptr)
+long	ft_atoi(char *nptr)
 {
 	int			i;
 	int			sign;

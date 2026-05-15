@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-t_philos *initialize(t_philos *philos, t_shared_info *shared, char **av, int n)
+t_philos	*initialize(t_shared_info *shared, char **av, int n)
 {
-	t_philos *tmp;
-	t_philos *curr;
-	int i;
+	t_philos	*tmp;
+	t_philos	*curr;
+	int			i;
 
 	init_shared(shared, av);
 	tmp = init_philos(ft_atoi(av[1]), shared);

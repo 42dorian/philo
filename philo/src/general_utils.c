@@ -21,6 +21,8 @@ void	free_philos(t_philos **head, int philo_size)
 		return ;
 	i = 0;
 	curr = *head;
+	pthread_mutex_destroy(&curr->shared_info->end_mutex);
+	pthread_mutex_destroy(&curr->shared_info->print_mutex);
 	while (i < philo_size)
 	{
 		next = curr->next;
@@ -43,30 +45,43 @@ long	time_to_ms(void)
 
 int	check_input(int ac, char **av)
 {
-	int	i;
+	int		i;
+	long	value;
 
 	i = 1;
+	value = 0;
 	if (ac < 5 || ac > 6)
-		return (printf("Error: Wrong number of arguments\n"), 0);
-	if (ft_atoi(av[1]) < 1)
-	{
-		printf("Error:\nMust be at least 1 philo\n");
-		return (0);
-	}
+		return (printf("Error: Usage: ./philo [n] [ttd] [tte] [tts] (meals)\n"),
+			0);
 	while (av[i])
 	{
-		if (!is_num(av[i]))
-			return (printf("Error:\nArguments must be all digits!\n"), 0);
+		if (!is_num(av[i]) || av[i][0] == '\0')
+			return (printf("Error: Argument '%s' must be positive digits\n",
+					av[i]), 0);
+		value = ft_atoi(av[i]);
+		if (value > 2147483647)
+			return (printf("Error: Argument '%s' exceeds INT_MAX\n", av[i]), 0);
+		if (i == 1 && value < 1)
+			return (printf("Error: Must be at least 1 philosopher\n"), 0);
 		i++;
 	}
 	return (1);
 }
 
-void	ft_usleep(long ms)
+void	ft_usleep(long ms, t_philos *philo)
 {
 	long	start_time;
 
 	start_time = time_to_ms();
 	while ((time_to_ms() - start_time) < ms)
+	{
+		pthread_mutex_lock(&philo->shared_info->end_mutex);
+		if (philo->shared_info->stop_routine)
+		{
+			pthread_mutex_unlock(&philo->shared_info->end_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&philo->shared_info->end_mutex);
 		usleep(500);
+	}
 }
