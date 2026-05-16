@@ -55,12 +55,10 @@ int	main(int ac, char **av)
 	t_philos		*philos;
 	t_shared_info	shared;
 	int				philo_size;
-	int				i;
 
 	if (!check_input(ac, av))
 		return (1);
 	philos = NULL;
-	i = 0;
 	philo_size = ft_atoi(av[1]);
 	philos = initialize(&shared, av, philo_size);
 	if (!philos)
